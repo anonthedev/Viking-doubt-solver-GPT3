@@ -3,26 +3,27 @@ import { useState } from "react";
 
 export default function Home() {
   const [promptInput, setPromptInput] = useState();
-  const [apiOutput, setApiOutput] = useState("");
-  const [isGenerating, setIsGenerating] = useState(false);
-
+  const [apiOutput, setApiOutput] = useState('')
+  const [isGenerating, setIsGenerating] = useState(false)
+  
   const callGenerateEndpoint = async () => {
     setIsGenerating(true);
-    const response = await fetch("/api/generateText", {
-      method: "POST",
+    
+    const response = await fetch('/api/generateText', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({ promptInput }),
     });
-
+  
     const data = await response.json();
     const { output } = data;
-
+    console.log("OpenAI replied...", output.text)
+  
     setApiOutput(`${output.text}`);
     setIsGenerating(false);
-  };
-
+  }
   return (
     <div className={styles.container}>
       <div className={styles.headings}>
@@ -33,7 +34,7 @@ export default function Home() {
         value={promptInput}
         className={styles.promptInput}
         type="text"
-        placeholder="Type in your questions..."
+        placeholder="Type in your question..."
         onChange={(e) => {
           setPromptInput(e.target.value);
         }}

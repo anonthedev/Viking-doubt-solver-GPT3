@@ -8,6 +8,9 @@ const openai = new OpenAIApi(configuration)
 
 const basePromptSuffix = "provide me with the source of the answer";
 const generateAction = async (req, res) => {
+  // Run first prompt
+  console.log(`API: ${req.body.promptInput}${basePromptSuffix}`)
+
   const baseCompletion = await openai.createCompletion({
     model: 'text-davinci-003',
     prompt: `${req.body.promptInput}${basePromptSuffix}`,
