@@ -6,7 +6,7 @@ const configuration = new Configuration({
 
 const openai = new OpenAIApi(configuration)
 
-const basePromptSuffix = "provide me with the source of the answer";
+const basePromptSuffix = "provide me with sources for the answers remove any urls in the source";
 const generateAction = async (req, res) => {
   // Run first prompt
   console.log(`API: ${req.body.promptInput}${basePromptSuffix}`)
